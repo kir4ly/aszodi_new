@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+aszodi-bau-builds-6a20d8f5/node_modules/
+
+# Build outputs
+aszodi-bau-builds-6a20d8f5/dist/
+aszodi-bau-builds-6a20d8f5/dist-ssr/
+
+# Environment variables - CRITICAL: Never commit these!
+aszodi-bau-builds-6a20d8f5/.env
+aszodi-bau-builds-6a20d8f5/.env.local
+aszodi-bau-builds-6a20d8f5/.env.*.local
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor directories and files
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local development
+*.local
+
+# Claude settings (if they contain sensitive data)
+.claude/settings.local.json
