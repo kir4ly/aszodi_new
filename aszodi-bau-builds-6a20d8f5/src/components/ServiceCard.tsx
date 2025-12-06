@@ -1,10 +1,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { LucideIcon } from "lucide-react";
+import { ReactNode } from "react";
 
 interface ServiceCardProps {
   icon: LucideIcon;
   title: string;
-  description: string;
+  description: string | ReactNode;
 }
 
 const ServiceCard = ({ icon: Icon, title, description }: ServiceCardProps) => {
