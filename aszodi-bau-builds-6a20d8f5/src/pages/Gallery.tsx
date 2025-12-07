@@ -206,6 +206,22 @@ const Gallery = () => {
   });
 
   useEffect(() => {
+    // Debug: Check if Supabase is configured
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseKey) {
+      console.error('❌ Supabase nincs konfigurálva!');
+      console.error('VITE_SUPABASE_URL:', supabaseUrl ? '✓ Beállítva' : '✗ Hiányzik');
+      console.error('VITE_SUPABASE_ANON_KEY:', supabaseKey ? '✓ Beállítva' : '✗ Hiányzik');
+      setError('Supabase nincs konfigurálva. Ellenőrizd a .env fájlt és indítsd újra a dev szervert!');
+      setIsLoading(false);
+      return;
+    }
+
+    console.log('✓ Supabase konfigurálva');
+    console.log('URL:', supabaseUrl);
+
     loadProjects();
   }, []);
 
@@ -217,7 +233,8 @@ const Gallery = () => {
       setProjects(data);
     } catch (err) {
       console.error("Error loading projects:", err);
-      setError("Hiba történt a projektek betöltése során");
+      const errorMessage = err instanceof Error ? err.message : "Ismeretlen hiba történt";
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -282,8 +299,30 @@ const Gallery = () => {
 
           {/* Error State */}
           {error && (
-            <div className="text-center py-20">
-              <p className="text-red-500 text-lg mb-4">{error}</p>
+            <div className="max-w-2xl mx-auto text-center py-20 px-4">
+              <div className="bg-red-50 border-2 border-red-200 rounded-lg p-8 mb-6">
+                <p className="text-red-700 text-lg font-semibold mb-2">⚠️ Hiba történt</p>
+                <p className="text-red-600 mb-4 whitespace-pre-line">{error}</p>
+                {(error.includes('adatbázis táblák') || error.includes('Supabase-hez') || error.includes('konfigurálva')) && (
+                  <div className="text-left bg-white p-4 rounded border border-red-200 text-sm text-gray-700 mt-4">
+                    <p className="font-semibold mb-2">📝 Megoldás:</p>
+                    <ol className="list-decimal list-inside space-y-2">
+                      <li>Nyisd meg a Supabase Dashboard-ot (<a href="https://supabase.com/dashboard" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">supabase.com/dashboard</a>)</li>
+                      <li>Ellenőrizd, hogy a projekt létezik-e és fut-e</li>
+                      <li>Menj a "SQL Editor" menüpontba</li>
+                      <li>Futtasd le a <code className="bg-gray-100 px-2 py-1 rounded">supabase-setup.sql</code> fájl tartalmát</li>
+                      <li>Hozd létre az "images" storage bucket-et (Storage → New bucket → Public)</li>
+                      <li>Ellenőrizd a .env fájlban a VITE_SUPABASE_URL és VITE_SUPABASE_ANON_KEY értékeket</li>
+                      <li>Indítsd újra a dev szervert: <code className="bg-gray-100 px-2 py-1 rounded">npm run dev</code></li>
+                      <li>Lásd részletesen: <code className="bg-gray-100 px-2 py-1 rounded">SETUP.md</code></li>
+                    </ol>
+                    <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded">
+                      <p className="font-semibold text-blue-900 mb-1">💡 Tipp:</p>
+                      <p className="text-blue-800">Nyisd meg a böngésző konzolt (F12) a részletes hibákért!</p>
+                    </div>
+                  </div>
+                )}
+              </div>
               <Button onClick={loadProjects}>Újrapróbálás</Button>
             </div>
           )}

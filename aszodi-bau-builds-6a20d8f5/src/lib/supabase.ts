@@ -5,7 +5,8 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 
 // Warn if Supabase is not configured
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('⚠️ Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file.');
+  console.error('⚠️ Supabase nincs konfigurálva! Állítsd be a VITE_SUPABASE_URL és VITE_SUPABASE_ANON_KEY változókat a .env fájlban.');
+  console.error('📝 Lásd a supabase-setup.sql fájlt az adatbázis beállításához.');
 }
 
 // Create a dummy client if not configured to prevent crashes
@@ -55,6 +56,11 @@ export const createProject = async (
   description: string | null,
   files: File[]
 ): Promise<string> => {
+  // Check if Supabase is configured
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error('Supabase nincs konfigurálva. Ellenőrizd a .env fájlt!');
+  }
+
   // Create the project first
   const { data: project, error: projectError } = await supabase
     .from('projects')
@@ -66,7 +72,14 @@ export const createProject = async (
     .single();
 
   if (projectError || !project) {
-    throw projectError || new Error('Failed to create project');
+    console.error('Error creating project:', projectError);
+
+    // Check if table doesn't exist
+    if (projectError?.message.includes('relation') && projectError?.message.includes('does not exist')) {
+      throw new Error('Az adatbázis táblák nincsenek létrehozva. Futtasd le a supabase-setup.sql fájlt!');
+    }
+
+    throw new Error(`Projekt létrehozása sikertelen: ${projectError?.message || 'Ismeretlen hiba'}`);
   }
 
   // Upload all images
@@ -83,9 +96,16 @@ export const createProject = async (
       .upload(filePath, file);
 
     if (uploadError) {
+      console.error('Error uploading image:', uploadError);
       // Cleanup: delete project and any uploaded images
       await deleteProject(project.id);
-      throw uploadError;
+
+      // Check if bucket doesn't exist
+      if (uploadError.message.includes('not found') || uploadError.message.includes('bucket')) {
+        throw new Error('A "images" storage bucket nem található. Hozd létre a Supabase Dashboard-on!');
+      }
+
+      throw new Error(`Kép feltöltése sikertelen: ${uploadError.message}`);
     }
 
     const { data: { publicUrl } } = supabase.storage
@@ -107,45 +127,93 @@ export const createProject = async (
     .insert(imageRecords);
 
   if (imagesError) {
+    console.error('Error inserting image records:', imagesError);
     // Cleanup: delete project (cascade will delete image records, but we need to delete files)
     await deleteProject(project.id);
-    throw imagesError;
+
+    throw new Error(`Képek adatbázisba mentése sikertelen: ${imagesError.message}`);
   }
 
   return project.id;
 };
 
 export const getProjects = async (): Promise<Project[]> => {
-  const { data: projects, error: projectsError } = await supabase
-    .from('projects')
-    .select('*')
-    .order('created_at', { ascending: false });
+  try {
+    // Check if Supabase is configured
+    if (!supabaseUrl || !supabaseAnonKey) {
+      throw new Error('Supabase nincs konfigurálva. Ellenőrizd a .env fájlt!');
+    }
 
-  if (projectsError) {
-    throw projectsError;
+    const { data: projects, error: projectsError } = await supabase
+      .from('projects')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (projectsError) {
+      console.error('Error fetching projects:', projectsError);
+
+      // Check for common error types
+      if (projectsError.message.includes('relation') && projectsError.message.includes('does not exist')) {
+        throw new Error('Az adatbázis táblák nincsenek létrehozva. Futtasd le a supabase-setup.sql fájlt a Supabase Dashboard SQL Editor-jában!');
+      }
+
+      // Check for network/connection errors
+      if (projectsError.message.includes('Failed to fetch') ||
+          projectsError.message.includes('Load failed') ||
+          projectsError.message.includes('NetworkError')) {
+        throw new Error('Nem sikerült kapcsolódni a Supabase-hez. Ellenőrizd az internet kapcsolatot és a VITE_SUPABASE_URL értékét a .env fájlban!');
+      }
+
+      // Check for authentication errors
+      if (projectsError.message.includes('JWT') ||
+          projectsError.message.includes('Invalid API key') ||
+          projectsError.message.includes('unauthorized')) {
+        throw new Error('Érvénytelen Supabase API kulcs. Ellenőrizd a VITE_SUPABASE_ANON_KEY értékét a .env fájlban!');
+      }
+
+      throw new Error(`Projektek betöltése sikertelen: ${projectsError.message}`);
+    }
+
+    if (!projects || projects.length === 0) {
+      return [];
+    }
+
+    // Fetch images for all projects
+    const { data: images, error: imagesError } = await supabase
+      .from('project_images')
+      .select('*')
+      .order('display_order', { ascending: true });
+
+    if (imagesError) {
+      console.error('Error fetching project images:', imagesError);
+
+      // Check if table doesn't exist
+      if (imagesError.message.includes('relation') && imagesError.message.includes('does not exist')) {
+        throw new Error('Az adatbázis táblák nincsenek létrehozva. Futtasd le a supabase-setup.sql fájlt a Supabase Dashboard SQL Editor-jában!');
+      }
+
+      throw new Error(`Projekt képek betöltése sikertelen: ${imagesError.message}`);
+    }
+
+    // Group images by project
+    const projectsWithImages = projects.map(project => ({
+      ...project,
+      images: (images || []).filter(img => img.project_id === project.id),
+    }));
+
+    return projectsWithImages;
+  } catch (error) {
+    console.error('Error in getProjects:', error);
+
+    // Check if it's a TypeError (network error)
+    if (error instanceof TypeError) {
+      if (error.message.includes('Load failed') || error.message.includes('Failed to fetch')) {
+        throw new Error('Nem sikerült kapcsolódni a Supabase-hez. Lehetséges okok:\n1. Nincs internet kapcsolat\n2. A VITE_SUPABASE_URL helytelen a .env fájlban\n3. A Supabase projekt nem létezik vagy nem elérhető\n\n🔧 Ellenőrizd a .env fájlt és a SETUP.md útmutatót!');
+      }
+    }
+
+    throw error;
   }
-
-  if (!projects || projects.length === 0) {
-    return [];
-  }
-
-  // Fetch images for all projects
-  const { data: images, error: imagesError } = await supabase
-    .from('project_images')
-    .select('*')
-    .order('display_order', { ascending: true });
-
-  if (imagesError) {
-    throw imagesError;
-  }
-
-  // Group images by project
-  const projectsWithImages = projects.map(project => ({
-    ...project,
-    images: (images || []).filter(img => img.project_id === project.id),
-  }));
-
-  return projectsWithImages;
 };
 
 export const deleteProject = async (id: string): Promise<void> => {

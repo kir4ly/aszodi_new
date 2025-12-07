@@ -38,7 +38,13 @@ const ImageUploader = () => {
       const data = await getProjects();
       setProjects(data);
     } catch (error) {
-      toast.error("Hiba a projektek betöltése során");
+      const errorMessage = error instanceof Error ? error.message : "Hiba a projektek betöltése során";
+      toast.error(errorMessage, {
+        duration: 5000,
+        description: errorMessage.includes('adatbázis táblák')
+          ? 'Lásd a SETUP.md fájlt a részletekért'
+          : undefined
+      });
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -113,7 +119,13 @@ const ImageUploader = () => {
 
       await loadProjects();
     } catch (error) {
-      toast.error("Hiba a projekt létrehozása során");
+      const errorMessage = error instanceof Error ? error.message : "Hiba a projekt létrehozása során";
+      toast.error(errorMessage, {
+        duration: 5000,
+        description: errorMessage.includes('storage') || errorMessage.includes('bucket')
+          ? 'Ellenőrizd, hogy a "images" storage bucket létezik és publikus'
+          : undefined
+      });
       console.error(error);
     } finally {
       setIsUploading(false);

@@ -47,7 +47,7 @@ const Footer = () => {
               <Link to="/kepgaleria" className="block text-muted-foreground hover:text-primary transition-colors">
                 Képgaléria
               </Link>
-              <a href="https://www.facebook.com/AszodiBau" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://www.facebook.com/profile.php?id=61582900477580" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors">
                 <Facebook className="h-5 w-5" />
                 <span>Facebook</span>
               </a>

@@ -179,7 +179,7 @@ const Contact = () => {
                     <Facebook className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
                     <div>
                       <h3 className="font-semibold mb-1">Facebook</h3>
-                      <a href="https://www.facebook.com/AszodiBau" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      <a href="https://www.facebook.com/profile.php?id=61582900477580" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                         @Aszódi Bau
                       </a>
                     </div>
