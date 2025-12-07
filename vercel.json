@@ -1,4 +1,6 @@
 {
+  "buildCommand": "cd aszodi-bau-builds-6a20d8f5 && npm install && npm run build",
+  "outputDirectory": "aszodi-bau-builds-6a20d8f5/dist",
   "rewrites": [
     {
       "source": "/(.*)",
