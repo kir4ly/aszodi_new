@@ -49,6 +49,13 @@ ALTER TABLE admin_access ENABLE ROW LEVEL SECURITY;
 ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
 ALTER TABLE project_images ENABLE ROW LEVEL SECURITY;
 
+-- 3.1 MEGLÉVŐ POLICY-K TÖRLÉSE (ha újrafuttatod a scriptet)
+DROP POLICY IF EXISTS "Admin access readable by all" ON admin_access;
+DROP POLICY IF EXISTS "Projects readable by all" ON projects;
+DROP POLICY IF EXISTS "Projects writable by all" ON projects;
+DROP POLICY IF EXISTS "Project images readable by all" ON project_images;
+DROP POLICY IF EXISTS "Project images writable by all" ON project_images;
+
 -- 4. RLS POLICIES
 -- Ezek a szabályok határozzák meg, hogy ki mit olvashat/írhat
 
@@ -65,7 +72,8 @@ CREATE POLICY "Projects readable by all"
 -- Projects: Bárki írhatja (később finomíthatod)
 CREATE POLICY "Projects writable by all"
   ON projects FOR ALL
-  USING (true);
+  USING (true)
+  WITH CHECK (true);
 
 -- Project images: Mindenki olvashatja
 CREATE POLICY "Project images readable by all"
@@ -75,7 +83,8 @@ CREATE POLICY "Project images readable by all"
 -- Project images: Bárki írhatja (később finomíthatod)
 CREATE POLICY "Project images writable by all"
   ON project_images FOR ALL
-  USING (true);
+  USING (true)
+  WITH CHECK (true);
 
 -- 5. ADMIN ACCESS KÓD BESZÚRÁSA
 -- Cseréld ki a 'Aszodibau1212345' értéket a saját hozzáférési kódodra!
@@ -112,18 +121,25 @@ ON CONFLICT (code) DO NOTHING;
 -- Alternatíva: Ha van hozzáférésed a Supabase SQL Editor-hoz,
 -- használhatod ezt a storage policy létrehozást is:
 
--- INSERT INTO storage.buckets (id, name, public)
--- VALUES ('images', 'images', true)
--- ON CONFLICT (id) DO NOTHING;
+-- Töröljük a meglévő storage policy-kat
+DROP POLICY IF EXISTS "Public read images" ON storage.objects;
+DROP POLICY IF EXISTS "Public insert images" ON storage.objects;
+DROP POLICY IF EXISTS "Public delete images" ON storage.objects;
 
--- CREATE POLICY "Public read images"
--- ON storage.objects FOR SELECT
--- USING (bucket_id = 'images');
+-- Storage bucket létrehozása
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('images', 'images', true)
+ON CONFLICT (id) DO NOTHING;
 
--- CREATE POLICY "Public insert images"
--- ON storage.objects FOR INSERT
--- WITH CHECK (bucket_id = 'images');
+-- Storage policy-k létrehozása
+CREATE POLICY "Public read images"
+ON storage.objects FOR SELECT
+USING (bucket_id = 'images');
 
--- CREATE POLICY "Public delete images"
--- ON storage.objects FOR DELETE
--- USING (bucket_id = 'images');
+CREATE POLICY "Public insert images"
+ON storage.objects FOR INSERT
+WITH CHECK (bucket_id = 'images');
+
+CREATE POLICY "Public delete images"
+ON storage.objects FOR DELETE
+USING (bucket_id = 'images');
