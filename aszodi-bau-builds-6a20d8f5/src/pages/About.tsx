@@ -31,8 +31,7 @@ const About = () => {
               Teljes körű felújítás – a konyhától a fürdőig
             </h2>
             <p className="text-lg leading-relaxed">
-              Cégünk több éves tapasztalattal vállal teljeskörű felújításokat és kivitelezéseket,
-              legyen szó lakóházakról, irodákról vagy egyéb épületekről. Szakértő csapatunk minden
+              Cégünk több éves tapasztalattal vállal teljeskörű felújításokat és kivitelezéseket, legyen szó lakóházakról, irodákról vagy egyéb épületekről. Szakértő csapatunk minden
               igényt figyelembe véve, precízen és megbízhatóan végzi el a munkákat, a legmagasabb
               minőségi standardok szerint.
             </p>

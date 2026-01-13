@@ -7,7 +7,7 @@ import { Home as HomeIcon, Building2, Hammer, Grid3x3, Paintbrush, ArrowRight, C
 import ServiceCard from "@/components/ServiceCard";
 import { getProjects, type Project } from "@/lib/supabase";
 import heroImage from "@/assets/hero-building.png";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/aszodi bau logo.png";
 import gallery1 from "@/assets/gallery-1-new.jpg";
 import gallery7 from "@/assets/gallery-7.jpg";
 import gallery8 from "@/assets/gallery-8.jpg";
