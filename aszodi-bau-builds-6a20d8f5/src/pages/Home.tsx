@@ -216,7 +216,7 @@ const Home = () => {
       </section>
 
       {/* About Section Preview */}
-      <section className="py-20 bg-secondary relative overflow-hidden">
+      <section className="pt-20 pb-32 bg-secondary overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
@@ -236,8 +236,13 @@ const Home = () => {
                 </Link>
               </Button>
             </div>
-            <div className="animate-scale-in relative md:w-[120%] md:translate-x-[10%]">
-              <img src={aboutRoom2} alt="Aszódi Bau építőipari referencia munka" className="rounded-lg shadow-xl w-full h-auto" />
+            <div className="animate-scale-in relative">
+              <img src={gallery1} alt="Aszódi Bau építőipari referencia munka" className="rounded-lg shadow-xl w-full h-auto" />
+              <img
+                src={aboutRoom2}
+                alt="Aszódi Bau fürdőszoba felújítás"
+                className="absolute -bottom-8 -right-8 md:-bottom-12 md:-right-12 w-1/2 rounded-lg shadow-2xl border-4 border-white"
+              />
             </div>
           </div>
         </div>
