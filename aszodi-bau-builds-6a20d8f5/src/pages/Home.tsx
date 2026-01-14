@@ -9,6 +9,7 @@ import { getProjects, type Project } from "@/lib/supabase";
 import heroImage from "@/assets/hero-building.png";
 import logo from "@/assets/aszodi bau logo.png";
 import gallery1 from "@/assets/gallery-1-new.jpg";
+import aboutRoom2 from "@/assets/about-room-2.jpg";
 import gallery7 from "@/assets/gallery-7.jpg";
 import gallery8 from "@/assets/gallery-8.jpg";
 import gallery9 from "@/assets/gallery-9.jpg";
@@ -215,7 +216,7 @@ const Home = () => {
       </section>
 
       {/* About Section Preview */}
-      <section className="py-20 bg-secondary">
+      <section className="py-20 bg-secondary relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
@@ -235,8 +236,8 @@ const Home = () => {
                 </Link>
               </Button>
             </div>
-            <div className="animate-scale-in">
-              <img src={gallery1} alt="Aszódi Bau építőipari referencia munka" className="rounded-lg shadow-xl w-full h-auto" />
+            <div className="animate-scale-in relative md:w-[120%] md:translate-x-[10%]">
+              <img src={aboutRoom2} alt="Aszódi Bau építőipari referencia munka" className="rounded-lg shadow-xl w-full h-auto" />
             </div>
           </div>
         </div>
