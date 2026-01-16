@@ -234,7 +234,7 @@ const Home = () => {
                 <img
                   src={aboutRoom2}
                   alt="Aszódi Bau fürdőszoba felújítás"
-                  className="rounded-lg shadow-2xl w-full h-auto border-4 border-white"
+                  className="rounded-lg shadow-2xl w-full h-auto"
                 />
               </div>
             </div>
