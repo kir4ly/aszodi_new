@@ -220,6 +220,24 @@ const Home = () => {
       <section className="pt-20 pb-32 bg-secondary overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="animate-scale-in relative flex items-end gap-4 md:gap-6">
+              {/* Bal oldali kisebb kép - fürdőszoba */}
+              <div className="relative w-2/5 -mt-16 md:-mt-24 z-10">
+                <img
+                  src={aboutRoom2}
+                  alt="Aszódi Bau fürdőszoba felújítás"
+                  className="rounded-lg shadow-xl w-full h-auto"
+                />
+              </div>
+              {/* Jobb oldali nagyobb kép - szoba */}
+              <div className="relative w-3/5 z-20">
+                <img
+                  src={gallery1}
+                  alt="Aszódi Bau lakásfelújítás"
+                  className="rounded-lg shadow-2xl w-full h-auto border-4 border-white"
+                />
+              </div>
+            </div>
             <div className="animate-fade-in">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Rólunk – Aszódi Bau</h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
@@ -236,24 +254,6 @@ const Home = () => {
                   Tudj meg többet <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-            </div>
-            <div className="animate-scale-in relative flex items-end gap-4 md:gap-6">
-              {/* Bal oldali kisebb kép - fürdőszoba */}
-              <div className="relative w-2/5 -mt-16 md:-mt-24 z-10">
-                <img
-                  src={aboutRoom2}
-                  alt="Aszódi Bau fürdőszoba felújítás"
-                  className="rounded-lg shadow-xl w-full h-auto"
-                />
-              </div>
-              {/* Jobb oldali nagyobb kép - szoba */}
-              <div className="relative w-3/5 z-20">
-                <img
-                  src={aboutRoom}
-                  alt="Aszódi Bau lakásfelújítás"
-                  className="rounded-lg shadow-2xl w-full h-auto border-4 border-white"
-                />
-              </div>
             </div>
           </div>
         </div>
