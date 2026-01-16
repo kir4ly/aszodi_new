@@ -10,6 +10,7 @@ import heroImage from "@/assets/hero-building.png";
 import logo from "@/assets/aszodi bau logo.png";
 import gallery1 from "@/assets/gallery-1-new.jpg";
 import aboutRoom2 from "@/assets/about-room-2.jpg";
+import aboutRoom from "@/assets/about-room.jpg";
 import gallery7 from "@/assets/gallery-7.jpg";
 import gallery8 from "@/assets/gallery-8.jpg";
 import gallery9 from "@/assets/gallery-9.jpg";
@@ -236,13 +237,23 @@ const Home = () => {
                 </Link>
               </Button>
             </div>
-            <div className="animate-scale-in relative">
-              <img src={gallery1} alt="Aszódi Bau építőipari referencia munka" className="rounded-lg shadow-xl w-full h-auto" />
-              <img
-                src={aboutRoom2}
-                alt="Aszódi Bau fürdőszoba felújítás"
-                className="absolute -bottom-8 -right-8 md:-bottom-12 md:-right-12 w-1/2 rounded-lg shadow-2xl border-4 border-white"
-              />
+            <div className="animate-scale-in relative flex items-end gap-4 md:gap-6">
+              {/* Bal oldali kisebb kép - fürdőszoba */}
+              <div className="relative w-2/5 -mt-16 md:-mt-24 z-10">
+                <img
+                  src={aboutRoom2}
+                  alt="Aszódi Bau fürdőszoba felújítás"
+                  className="rounded-lg shadow-xl w-full h-auto"
+                />
+              </div>
+              {/* Jobb oldali nagyobb kép - szoba */}
+              <div className="relative w-3/5 z-20">
+                <img
+                  src={aboutRoom}
+                  alt="Aszódi Bau lakásfelújítás"
+                  className="rounded-lg shadow-2xl w-full h-auto border-4 border-white"
+                />
+              </div>
             </div>
           </div>
         </div>
