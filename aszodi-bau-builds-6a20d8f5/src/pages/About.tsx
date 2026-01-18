@@ -1,7 +1,6 @@
 import { CheckCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import gallery1 from "@/assets/about-room.jpg";
-import gallery2 from "@/assets/about-room-2.jpg";
+import ownerImage from "@/assets/about-owner.png";
 
 const About = () => {
   const highlights = [
@@ -27,9 +26,6 @@ const About = () => {
         <div className="container mx-auto px-4">
           {/* Text content first */}
           <div className="max-w-4xl mx-auto mb-16 animate-scale-in space-y-6">
-            <h2 className="text-3xl font-bold text-primary text-center">
-              Teljes körű felújítás – a konyhától a fürdőig
-            </h2>
             <p className="text-lg leading-relaxed">
               Ausztriában szerzett szakmai tapasztalataim során testközelből láttam, milyen színvonalú szolgáltatást kapnak az ügyfelek Nyugat-Európában. Célunk, hogy ezt a minőséget Magyarországon is elérhetővé tegyük.
             </p>
@@ -47,24 +43,13 @@ const About = () => {
             </p>
           </div>
 
-          {/* Two images side by side */}
-          <div className="max-w-6xl mx-auto mb-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="animate-fade-in">
-                <img
-                  src={gallery1}
-                  alt="Aszódi Bau építőipari munka"
-                  className="rounded-lg shadow-xl w-full h-auto"
-                />
-              </div>
-              <div className="animate-fade-in">
-                <img
-                  src={gallery2}
-                  alt="Aszódi Bau felújítás"
-                  className="rounded-lg shadow-xl w-full h-auto"
-                />
-              </div>
-            </div>
+          {/* Owner image */}
+          <div className="max-w-md mx-auto mb-16 animate-fade-in">
+            <img
+              src={ownerImage}
+              alt="Aszódi Bau tulajdonos"
+              className="rounded-lg shadow-xl w-full h-auto"
+            />
           </div>
 
           {/* Highlights */}
