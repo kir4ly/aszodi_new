@@ -31,21 +31,19 @@ const About = () => {
               Teljes körű felújítás – a konyhától a fürdőig
             </h2>
             <p className="text-lg leading-relaxed">
-              Cégünk több éves tapasztalattal vállal teljeskörű felújításokat és kivitelezéseket, legyen szó lakóházakról, irodákról vagy egyéb épületekről. Szakértő csapatunk minden
-              igényt figyelembe véve, precízen és megbízhatóan végzi el a munkákat, a legmagasabb
-              minőségi standardok szerint.
+              Ausztriában szerzett szakmai tapasztalataim során testközelből láttam, milyen színvonalú szolgáltatást kapnak az ügyfelek Nyugat-Európában. Célunk, hogy ezt a minőséget Magyarországon is elérhetővé tegyük.
             </p>
             <p className="text-lg leading-relaxed">
-              Külföldön szereztük meg szakmai tapasztalatunkat, és onnan hoztuk haza a minőséget,
-              hogy ügyfeleinknek itthon is a legjobbat nyújthassuk. Segítséget nyújtunk pályázatokkal
-              kapcsolatos ügyintézésben, valamint ingatlanos partnereken keresztül támogatjuk
-              ügyfeleinket a megfelelő ingatlan megtalálásában vagy értékesítésében.
+              Évek alatt több vállalkozónál dolgoztam, ahol volt alkalmam megtapasztalni a szakma jó és rossz oldalát egyaránt. Ezekből tanulva építettük fel saját csapatunkat és működésünket – mi a precíz, korrekt és megbízható munkában hiszünk.
             </p>
             <p className="text-lg leading-relaxed">
-              Célunk, hogy minden ügyfelünk számára teljes körű, megbízható és magas színvonalú
-              szolgáltatást nyújtsunk. Fontos számunkra a bizalom és a korrektség – amit
-              megbeszélünk, az úgy is van. Megbízhatóság, precizitás és minőség – ez a mi alapunk
-              minden projektben.
+              Tisztában vagyunk vele, hogy sokan tartanak a felújítástól, gyakran korábbi rossz tapasztalatok miatt. Mi ezen szeretnénk változtatni. Minden projekt előtt alapos felmérést végzünk, részletesen egyeztetünk, és már az elején pontosan lefektetünk minden részletet. Így nincsenek utólagos meglepetések, rejtett költségek vagy félreértések.
+            </p>
+            <p className="text-lg leading-relaxed">
+              Célunk, hogy ügyfeleink a teljes folyamat során biztonságban érezzék magukat, és a végeredmény egy olyan munka legyen, amely szakmailag kimagasló, precíz és hosszú távon is értéket képvisel.
+            </p>
+            <p className="text-lg leading-relaxed font-semibold">
+              Nyugati színvonal – itthon.
             </p>
           </div>
 
