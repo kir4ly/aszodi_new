@@ -102,7 +102,7 @@ const Contact = () => {
                 <CardTitle>Küldjön üzenetet</CardTitle>
                 <CardDescription>
                   A csillaggal jelölt mezők kitöltése kötelező. 1–2 munkanapon belül felvesszük
-                  veled a kapcsolatot.
+                  önnel a kapcsolatot.
                 </CardDescription>
               </CardHeader>
               <CardContent>
