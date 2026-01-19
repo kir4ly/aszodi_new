@@ -16,9 +16,9 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Elérhetőség</h3>
             <div className="space-y-3">
-              <a href="mailto:aszodibau@gmail.com" className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors">
+              <a href="mailto:felujitas@aszodibau.hu" className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors">
                 <Mail className="h-5 w-5" />
-                <span>aszodibau@gmail.com</span>
+                <span>felujitas@aszodibau.hu</span>
               </a>
               <a href="tel:+36304372393" className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors">
                 <Phone className="h-5 w-5" />
