@@ -7,7 +7,7 @@ import { Home as HomeIcon, Building2, Hammer, Grid3x3, Paintbrush, ArrowRight, C
 import ServiceCard from "@/components/ServiceCard";
 import { getProjects, type Project } from "@/lib/supabase";
 import heroImage from "@/assets/hero-building.png";
-import logo from "@/assets/aszodi bau logo.png";
+import heroBox from "@/assets/hero-box.jpg";
 import gallery1 from "@/assets/gallery-1-new.jpg";
 import aboutRoom2 from "@/assets/about-room-2.jpg";
 import aboutRoom from "@/assets/about-room.jpg";
@@ -167,7 +167,7 @@ const Home = () => {
         </div>
         <div className="relative z-10 container mx-auto px-4 text-center text-white animate-fade-in">
           <div className="inline-block bg-white/95 backdrop-blur-sm p-8 shadow-2xl mb-8">
-            <img src={logo} alt="Aszódi Bau - Haza hoztuk a minőséget" className="w-full max-w-sm mx-auto" />
+            <img src={heroBox} alt="Aszódi Bau" className="w-full max-w-sm mx-auto" />
           </div>
           <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white">
             Építsük együtt álmaid otthonát
