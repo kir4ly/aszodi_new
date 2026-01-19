@@ -357,8 +357,8 @@ const Home = () => {
                   </p>
                   <p className="flex items-start">
                     <span className="font-semibold mr-2">Email:</span>
-                    <a href="mailto:aszodibau@gmail.com" className="hover:text-primary transition-colors">
-                      aszodibau@gmail.com
+                    <a href="mailto:felujitas@aszodibau.hu" className="hover:text-primary transition-colors">
+                      felujitas@aszodibau.hu
                     </a>
                   </p>
                 </div>
