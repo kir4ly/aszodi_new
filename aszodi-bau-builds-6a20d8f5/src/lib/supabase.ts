@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import imageCompression from 'browser-image-compression';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
@@ -29,6 +30,25 @@ export interface Project {
   created_at: string;
   images?: ProjectImage[];
 }
+
+export const compressImage = async (file: File): Promise<File> => {
+  const options = {
+    maxSizeMB: 0.3,
+    maxWidthOrHeight: 1920,
+    useWebWorker: true,
+    fileType: 'image/webp' as const,
+  };
+
+  try {
+    const compressedFile = await imageCompression(file, options);
+    // Rename to .webp extension
+    const newName = file.name.replace(/\.[^.]+$/, '.webp');
+    return new File([compressedFile], newName, { type: 'image/webp' });
+  } catch (error) {
+    console.warn('Képtömörítés sikertelen, eredeti fájl használata:', error);
+    return file;
+  }
+};
 
 export const verifyAccessCode = async (code: string): Promise<boolean> => {
   try {
@@ -82,11 +102,11 @@ export const createProject = async (
     throw new Error(`Projekt létrehozása sikertelen: ${projectError?.message || 'Ismeretlen hiba'}`);
   }
 
-  // Upload all images
+  // Compress and upload all images
   const uploadedImages: { url: string; order: number }[] = [];
 
   for (let i = 0; i < files.length; i++) {
-    const file = files[i];
+    const file = await compressImage(files[i]);
     const fileExt = file.name.split('.').pop();
     const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
     const filePath = `projects/${project.id}/${fileName}`;

@@ -202,7 +202,8 @@ const ImageUploader = () => {
             </div>
           </div>
           <p className="text-xs text-gray-500">
-            Egyszerre több képet is kiválaszthatsz (Ctrl/Cmd + klikk vagy Shift + klikk)
+            Egyszerre több képet is kiválaszthatsz (Ctrl/Cmd + klikk vagy Shift + klikk).
+            A képek automatikusan tömörítve lesznek (max 300 KB, WebP formátum).
           </p>
         </div>
 
@@ -238,7 +239,7 @@ const ImageUploader = () => {
           {isUploading ? (
             <>
               <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-              Projekt létrehozása...
+              Képek tömörítése és feltöltése...
             </>
           ) : (
             <>
@@ -293,6 +294,7 @@ const ImageUploader = () => {
                             src={image.image_url}
                             alt={project.title}
                             className="w-full h-full object-cover hover:scale-110 transition-transform duration-200"
+                            loading="lazy"
                           />
                         </div>
                       ))}

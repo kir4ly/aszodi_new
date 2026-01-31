@@ -227,6 +227,7 @@ const Home = () => {
                   src={gallery1}
                   alt="Aszódi Bau lakásfelújítás"
                   className="rounded-lg shadow-xl w-full h-auto"
+                  loading="lazy"
                 />
               </div>
               {/* Jobb oldali nagyobb kép - fürdőszoba */}
@@ -235,6 +236,7 @@ const Home = () => {
                   src={aboutRoom2}
                   alt="Aszódi Bau fürdőszoba felújítás"
                   className="rounded-lg shadow-2xl w-full h-auto"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -291,6 +293,7 @@ const Home = () => {
                       src={firstImage.image_url}
                       alt={project.title}
                       className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-300 flex items-end p-4">
                       <div className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -310,7 +313,7 @@ const Home = () => {
                 <div key={index} className="group relative overflow-hidden rounded-lg shadow-lg animate-scale-in" style={{
                   animationDelay: `${index * 0.1}s`
                 }}>
-                  <img src={image.src} alt={image.alt} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110" />
+                  <img src={image.src} alt={image.alt} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110" loading="lazy" />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300"></div>
                 </div>
               ))}
