@@ -6,7 +6,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Home as HomeIcon, Building2, Hammer, Grid3x3, Paintbrush, ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
 import { getProjects, type Project } from "@/lib/supabase";
-import heroImage from "@/assets/hero-building.png";
+import heroImage from "@/assets/hero-building.jpg";
 import heroBox from "@/assets/hero-box.jpg";
 import gallery1 from "@/assets/gallery-1-new.jpg";
 import aboutRoom2 from "@/assets/about-room-2.jpg";
@@ -162,12 +162,12 @@ const Home = () => {
       {/* Hero Section */}
       <section className="relative h-[800px] flex items-center justify-center">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="Aszódi Bau - Modern építőipari megoldások" className="w-full h-full object-cover" />
+          <img src={heroImage} alt="Aszódi Bau - Modern építőipari megoldások" className="w-full h-full object-cover" fetchPriority="high" decoding="async" />
           <div className="absolute inset-0 hero-gradient"></div>
         </div>
         <div className="relative z-10 container mx-auto px-4 text-center text-white animate-fade-in">
           <div className="inline-block bg-white/95 backdrop-blur-sm p-8 shadow-2xl mb-8">
-            <img src={heroBox} alt="Aszódi Bau" className="w-full max-w-sm mx-auto" />
+            <img src={heroBox} alt="Aszódi Bau" className="w-full max-w-sm mx-auto" fetchPriority="high" decoding="async" />
           </div>
           <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white">
             Építsük együtt álmaid otthonát

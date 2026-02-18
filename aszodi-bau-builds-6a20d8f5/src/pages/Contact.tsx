@@ -40,11 +40,13 @@ const Contact = () => {
 
     try {
       const result = await emailjs.send(
-        'service_t2v6tmm',
+        'service_rtieb23',
         'template_0muyr7p',
         {
+          to_email: 'felujitas@aszodibau.hu',
           from_name: formData.name,
           from_email: formData.email,
+          reply_to: formData.email,
           phone: formData.phone || 'Nincs megadva',
           message: formData.message,
         },

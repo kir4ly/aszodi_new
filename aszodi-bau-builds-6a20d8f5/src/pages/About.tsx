@@ -1,6 +1,6 @@
 import { CheckCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import ownerImage from "@/assets/about-owner.png";
+import ownerImage from "@/assets/about-owner.jpg";
 
 const About = () => {
   const highlights = [
@@ -49,6 +49,7 @@ const About = () => {
               src={ownerImage}
               alt="Aszódi Bau tulajdonos"
               className="rounded-lg shadow-xl w-full h-auto"
+              loading="lazy"
             />
           </div>
 
